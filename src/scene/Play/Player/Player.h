@@ -1,8 +1,17 @@
 #pragma once
 #include "DxLib.h"
+#include "../../../Input/Input.h"
+#include "../../../Common.h"
 
 class Player 
 {
+private:
+	int PlayerPosX, PlayerPosY;		// 座標
+	int PlayerWidth, PlayerHeight;	//プレイヤーのサイズ
+	int PlayerImgHndl;				// 画像ハンドル
+	int PlayerJumpPower;			// ジャンプ力
+	bool PlayerJumpFlg;				// ジャンプの可否(接地フラグ)
+
 public:
 	Player();
 	~Player();
@@ -10,20 +19,13 @@ public:
 	void StepPlayer();
 	void DrawPlayer();
 	void FinPlayer();
-	bool GetPlayerAttack();	//叩くフラグを取得
-	int GetPlayerPosX();	//座標取得
-	int GetPlayerPosY();	//座標取得
-	int GetPlayerPosH();	//座標取得
-	int GetPlayerPosW();	//座標取得
-
-private:
-	int PlayerPosH, PlayerPosW;	//プレイヤーの座標^\^
-	int PlayerPosX,PlayerPosY;	//プレイヤーの座標
-	int PlayerIdleHndl;	//プレイヤーの画像ハンドル(待機)
-	int PlayerAttackHndl;	//プレイヤーの画像ハンドル(攻撃)
-	int CurrentClickFlg, NextClickFlg;	//左クリックされているかを感知する
-	bool AttackFlg;	//モグラを叩くフラグ
-
+	
+	void SetJumpFlg(bool JumpFlg);	//主にマップチップとの当たり判定で接地したときに使う
+	
+	int GetPosX();		//プレイヤーのX座標
+	int GetPosY();		//プレイヤーのY座標
+	int GetWidth();		//プレイヤーの横幅
+	int GetHeight();	//プレイヤーの高さ
 };
 
 extern Player player;

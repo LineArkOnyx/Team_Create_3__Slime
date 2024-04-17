@@ -22,7 +22,7 @@ Result::~Result()
 }
 void Result::InitResult()
 {
-	Rate = Score / ClickCount;
+	
 
 	ResultHndl = LoadGraph(RESULT_PATH);
 	ScoreHndl = LoadGraph(SCORE_PATH);
@@ -44,8 +44,7 @@ void Result::DrawResult()
 	DrawGraph(Score_X, Score_Y, ScoreHndl, true);
 	DrawGraph(Mole_X, Mole_Y, MoleHndl, true);
 
-	DrawFormatString(700, 290, GetColor(255, 127, 255), "%d", Score);
-	DrawFormatString(700, 435, GetColor(255, 127, 255), "%d", ClickCount);
+	
 }
 void Result::FinResult() 
 {
