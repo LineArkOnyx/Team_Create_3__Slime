@@ -18,7 +18,3 @@ void Enemy::DrawEnemy()
 {
 	
 }
-void Enemy::Enemy_Hit_Hanmmer()
-{
-	
-}

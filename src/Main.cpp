@@ -10,8 +10,7 @@
 
 
 SCENE_ID sceneID;
-int Score;
-int ClickCount;
+int StageIndex;
 
 //設定フレームレート (60FPS)
 #define FRAME_RATE (60)

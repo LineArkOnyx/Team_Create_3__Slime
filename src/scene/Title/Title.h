@@ -1,9 +1,8 @@
 #pragma once
 #include "DxLib.h"
-
-constexpr int button_W = 400;
-constexpr int button_H = 100;
-
+#include "../scene.h"
+#include "../../Input/Input.h"
+#include "../../Common.h"
 
 class Title
 {
@@ -14,15 +13,10 @@ public:
 	void StepTitle();
 	void DrawTitle();
 	void FinTitle();
+
+
 private:
 	int TitleImgaeHndl;
-	int TitleButtonHndl;
-	int TitlehammerHndl;
-
-	int button_X;
-	int button_Y;
-
-	int hammer_X;
-	int hammer_Y;
-
+	int SelectImageHndl;
+	bool TitleDrawFlg;	//trueでタイトルを表示,falseでセレクト画面表示
 };

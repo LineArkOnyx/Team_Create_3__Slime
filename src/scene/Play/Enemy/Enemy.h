@@ -13,6 +13,5 @@ public:
 	void InitEnemy();
 	void Stepenemy();
 	void DrawEnemy();
-	void Enemy_Hit_Hanmmer();
 };
 extern Enemy enemy;
