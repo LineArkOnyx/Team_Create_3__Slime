@@ -17,9 +17,6 @@ public:
 	void DrawPlay();
 	void FinPlay();
 
-	//
-	void EnemyHitHammer();
 private:
-	int TimeLimit = 60 * 20;//ゲームのタイムリミット (20秒) fps60
-	int Rate;
+	
 };
