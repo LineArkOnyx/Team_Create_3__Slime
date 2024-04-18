@@ -14,3 +14,4 @@ public:
 	void DrawMap();
 };
 extern Map map;
+extern int MapChipData1[MAP_CHIP_Y_NUM][MAP_CHIP_X_NUM];		//ˆê‚Â–Ú‚Ìƒ}ƒbƒv
