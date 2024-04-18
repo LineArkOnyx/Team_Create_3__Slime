@@ -6,6 +6,8 @@ Player::Player()
 {
 	PlayerPosX = 0;
 	PlayerPosY = 0;
+	PlayerNextPosX = 0;
+	PlayerNextPosY = 0;
 	PlayerWidth = 32;
 	PlayerHeight = 32;
 	PlayerImgHndl = -1;
@@ -52,6 +54,16 @@ void Player::FinPlayer()
 void Player::SetJumpFlg(bool JumpFlg)
 {
 	PlayerJumpFlg = JumpFlg;
+}
+void Player::SetPlayerPos(int PosX, int PosY)
+{
+	PlayerPosX = PosX;
+	PlayerPosY = PosY;
+}
+void Player::SetPlayerNextPos(int PosX, int PosY)
+{
+	PlayerNextPosX = PosX;
+	PlayerNextPosY = PosY;
 }
 
 int Player::GetPosX()

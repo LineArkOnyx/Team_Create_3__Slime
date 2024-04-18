@@ -4,6 +4,7 @@
 #include "Common.h"
 #include "Input/Input.h"
 #include "scene/scene.h"
+#include "scene/Play/Player/Player.h"
 #include"Map/Map.h"
 
 
@@ -133,19 +134,23 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			{
 				map.InitMap();
 				map.ReadFilemap();
+				player.InitPlayer();
 				sceneID = SCENE_LOOP_PLAY;
 			}
 				break;
 
 			case SCENE_LOOP_PLAY:
 			{
+				player.StepPlayer();
+
 				map.DrawMap();	
+				player.DrawPlayer();
 			}
 				break;
 
 			case SCENE_FIN_PLAY:
 			{
-				
+				player.FinPlayer();
 			}
 				break;
 
