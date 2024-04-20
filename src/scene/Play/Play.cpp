@@ -14,7 +14,8 @@ void Play::InitPlay()
 }
 void Play::StepPlay()
 {
-	player.StepPlayer();
+	player.MovePlayer();
+	
 }
 void Play::DrawPlay()
 {

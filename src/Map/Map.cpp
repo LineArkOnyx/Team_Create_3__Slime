@@ -6,7 +6,7 @@ Map map;
 void Map::InitMap()
 {
 	//0にメインブロック
-	LoadDivGraph("Data/マップチップ.png", 16, 4, 4, 32, 32, MapHandle);
+	LoadDivGraph("Data/氷マップチップ.png", 16, 4, 4, 32, 32, MapHandle);
 }
 void Map::ReadFilemap()
 {

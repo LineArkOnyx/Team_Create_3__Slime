@@ -11,13 +11,15 @@ private:
 	int PlayerWidth, PlayerHeight;	//プレイヤーのサイズ
 	int PlayerImgHndl;				// 画像ハンドル
 	int PlayerJumpPower;			// ジャンプ力
+	int Player_Gravity_Speed;
 	bool PlayerJumpFlg;				// ジャンプの可否(接地フラグ)
 
 public:
 	Player();
 	~Player();
 	void InitPlayer();
-	void StepPlayer();
+	void MovePlayer();
+	void GravityPlayer();
 	void DrawPlayer();
 	void FinPlayer();
 	void PlayerHitMapColision();

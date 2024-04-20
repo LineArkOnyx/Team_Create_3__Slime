@@ -140,7 +140,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 			case SCENE_LOOP_PLAY:
 			{
-				player.StepPlayer();
+				player.MovePlayer();
+				player.GravityPlayer();
 				player.PlayerHitMapColision();
 				player.UpdatePos();
 				map.DrawMap();	

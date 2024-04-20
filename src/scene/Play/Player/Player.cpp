@@ -1,6 +1,10 @@
 #include "Player.h"
 #include"../../../Collision/Collision.h"
 #include"../../../Map/Map.h"
+#define PLAYER_SPEED  (5);
+#define PLAYER_GRAVITY_LIMIT	(10)
+#define PLAYER_GRAVITY  (1);
+#define PLAYER_JUNP		(28)
 Player player;
 Player::Player()
 {
@@ -12,6 +16,7 @@ Player::Player()
 	PlayerHeight = 32;
 	PlayerImgHndl = -1;
 	PlayerJumpPower = 0;
+	Player_Gravity_Speed = 0;
 	PlayerJumpFlg = true;
 }
 Player::~Player()
@@ -22,23 +27,39 @@ void Player::InitPlayer()
 {
 	PlayerImgHndl = LoadGraph("");
 }
-void Player::StepPlayer()
+void Player::MovePlayer()
 {
-	PlayerJumpPower -= GRAVITY;		//ジャンプ力を重力で減算
-	if (PlayerJumpFlg) {
-		PlayerJumpPower = 0;		//接地していればY軸移動を0に
+	//ジャンプ
+	if (PlayerJumpFlg == true&&IsKeyPush(KEY_INPUT_W) || IsKeyPush(KEY_INPUT_SPACE))
+	{
+		Player_Gravity_Speed -= PLAYER_JUNP;
 	}
-	if (IsKeyDown(KEY_INPUT_W) == 1 || IsKeyDown(KEY_INPUT_UP) == 1) {
-		PlayerJumpPower = 16;		//ジャンプした瞬間に接地フラグを折る
+	if (IsKeyRelease(KEY_INPUT_W) || IsKeyRelease(KEY_INPUT_SPACE))
+	{
 		PlayerJumpFlg = false;
 	}
-	if (IsKeyDown(KEY_INPUT_A) == 1 || IsKeyDown(KEY_INPUT_LEFT) == 1) {
-		PlayerPosX += 2;
+	if (IsKeyKeep(KEY_INPUT_A))
+	{
+		PlayerNextPosX -= PLAYER_SPEED;
 	}
-	if (IsKeyDown(KEY_INPUT_D) == 1 || IsKeyDown(KEY_INPUT_RIGHT) == 1) {
-		PlayerPosX -= 2;
+	if (IsKeyKeep(KEY_INPUT_D))
+	{
+		PlayerNextPosX += PLAYER_SPEED;
 	}
-	PlayerNextPosY += PlayerJumpPower;	//Y軸移動を確定
+}
+void Player::GravityPlayer()
+{
+	Player_Gravity_Speed += PLAYER_GRAVITY;
+	if (Player_Gravity_Speed >= PLAYER_GRAVITY_LIMIT)	//重力の上限を決める
+	{
+		PlayerNextPosY += PLAYER_GRAVITY_LIMIT;
+		Player_Gravity_Speed = PLAYER_GRAVITY_LIMIT;
+	}
+	else	//上限行くまで入る
+	{
+		PlayerNextPosY += Player_Gravity_Speed;
+	}
+
 }
 void Player::DrawPlayer()
 {
@@ -109,7 +130,6 @@ void Player::PlayerHitMapColision()
 			int By = y * 32;
 			int Bw = MAPCHIP_SIZW;
 			int Bh = MAPCHIP_SIZH;
-		
 
 			if (MapChipData1[y][x] == 0 /*|| MapChipData1[y][x] == 1 || MapChipData1[y][x] == 2 || MapChipData1[y][x] == 3 || MapChipData1[y][x] == 4*/)
 			{
@@ -134,31 +154,63 @@ void Player::PlayerHitMapColision()
 					if (dirArray[1]) {
 						// ★ここを考える
 						// めり込み量を計算する
+						PlayerJumpFlg = true;
 						int overlap = Ay + Ah - By;
 						PlayerNextPosY = (Ay - overlap);
 					}
-					Ay = PlayerPosY;
-					Ax = PlayerNextPosX;
-					if (Collision::IsHitRect(Ax, Ay, Aw, Ah, Bx, By, Bw, Bh))
-					{
-						if (dirArray[2]) {
-							// ★ここを考える
-							// めり込み量を計算する
-							int overlap = Bx + Bw - Ax;
-							PlayerNextPosX = (Ax + overlap);
-						}
-						// 右方向の修正
-						//マリオの右側
-						if (dirArray[3]) {
-							// ★ここを考える
-							// めり込み量を計算する
-							int overlap = Ax + Aw - Bx;
-							PlayerNextPosX = (Ax - overlap);
-						}
-					}
+					
 				}
 			}
 			
+		}
+	}
+	for (int y = 0; y < MAP_CHIP_Y_NUM; y++)
+	{
+		for (int x = 0; x < MAP_CHIP_X_NUM; x++)
+		{
+			// ★ここを考える
+			// どの方向に進んでいたかチェック
+			// ※Playerクラスに進む方向をチェックする関数を準備しています。
+
+			bool dirArray[4] = { false,false,false,false };
+			GetMoveDirection(dirArray);
+
+			// ★ここを考える
+			// 矩形の当たり判定用のデータを準備
+			// プレイヤーの情報
+			int Ax = PlayerPosX;
+			int Ay = PlayerPosY;
+			int Aw = PlayerWidth;
+			int Ah = PlayerHeight;
+
+			// オブジェクトの情報
+			int Bx = x * 32;
+			int By = y * 32;
+			int Bw = MAPCHIP_SIZW;
+			int Bh = MAPCHIP_SIZH;
+
+			if (MapChipData1[y][x] == 0 /*|| MapChipData1[y][x] == 1 || MapChipData1[y][x] == 2 || MapChipData1[y][x] == 3 || MapChipData1[y][x] == 4*/)
+			{
+				Ay = PlayerPosY;
+				Ax = PlayerNextPosX;
+				if (Collision::IsHitRect(Ax, Ay, Aw, Ah, Bx, By, Bw, Bh))
+				{
+					if (dirArray[2]) {
+						// ★ここを考える
+						// めり込み量を計算する
+						int overlap = Bx + Bw - Ax;
+						PlayerNextPosX = (Ax + overlap);
+					}
+					// 右方向の修正
+					//マリオの右側
+					if (dirArray[3]) {
+						// ★ここを考える
+						// めり込み量を計算する
+						int overlap = Ax + Aw - Bx;
+						PlayerNextPosX = (Ax - overlap);
+					}
+				}
+			}
 		}
 	}
 }
