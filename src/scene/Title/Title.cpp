@@ -53,7 +53,7 @@ void Title::DrawTitle()
 	}
 	else {
 		DrawGraph(0, 0, SelectImageHndl, true);
-		DrawFormatString(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2, GetColor(127, 127, 255), "STAGE : %d", sceneID);
+		DrawFormatString(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2, GetColor(127, 127, 255), "STAGE : %d", StageIndex);
 	}
 }
 void Title::FinTitle()
