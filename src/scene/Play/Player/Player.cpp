@@ -213,6 +213,32 @@ void Player::PlayerHitMapColision()
 			}
 		}
 	}
+	for (int y = 0; y < MAP_CHIP_Y_NUM; y++)
+	{
+		for (int x = 0; x < MAP_CHIP_X_NUM; x++)
+		{
+			int Ax = PlayerPosX;
+			int Ay = PlayerPosY;
+			int Aw = PlayerWidth;
+			int Ah = PlayerHeight;
+
+			// オブジェクトの情報
+			int Bx = x * 32;
+			int By = y * 32;
+			int Bw = MAPCHIP_SIZW;
+			int Bh = MAPCHIP_SIZH;
+			if (MapChipData1[y][x] == 3)
+			{
+				DrawBox(Bx, By, Bx + Bw, By + Bh, GetColor(255, 255, 255), false);
+				if (Collision::IsHitRect(Ax, Ay, Aw, Ah, Bx, By, Bw, Bh))
+				{
+					DrawFormatString(100, 70, GetColor(255, 0, 0), "ゴールヒット");
+
+				}
+			}
+		}
+	}
+
 }
 void Player::GetMoveDirection(bool* _dirArray)
 {
