@@ -12,13 +12,13 @@ Player::Player()
 	PlayerPosX = 0;
 	PlayerPosY = 0;
 	PlayerNextPosX = 400;
-	PlayerNextPosY = 0;
+	PlayerNextPosY = 300;
 	PlayerWidth = 32;
 	PlayerHeight = 32;
 	PlayerImgHndl = -1;
 	PlayerJumpPower = 0;
 	Player_Gravity_Speed = 0;
-	PlayerJumpFlg = true;
+	PlayerJumpFlg = false;
 }
 Player::~Player()
 {
@@ -26,16 +26,16 @@ Player::~Player()
 }
 void Player::InitPlayer()
 {
-	PlayerImgHndl = LoadGraph("");
+	PlayerImgHndl = LoadGraph("Data/スライム.png");
 	PlayerPosX = 0;
 	PlayerPosY = 0;
 	PlayerNextPosX = 400;
-	PlayerNextPosY = 0;
+	PlayerNextPosY = 300;
 }
 void Player::MovePlayer()
 {
 	//ジャンプ
-	if (PlayerJumpFlg == true&&IsKeyPush(KEY_INPUT_W) || IsKeyPush(KEY_INPUT_SPACE))
+  	if (IsKeyPush(KEY_INPUT_W) || IsKeyPush(KEY_INPUT_SPACE)&& PlayerJumpFlg == true )
 	{
 		Player_Gravity_Speed -= PLAYER_JUNP;
 	}
@@ -68,7 +68,7 @@ void Player::GravityPlayer()
 }
 void Player::DrawPlayer()
 {
-	DrawRotaGraph(PlayerPosX, PlayerPosY, 1.0, 0.0, PlayerImgHndl, true);
+	DrawRotaGraph(PlayerPosX+18, PlayerPosY+ 14, 1.0, 0.0, PlayerImgHndl, true);
 	// デバッグ用のボックス
 	/*DrawBox(PlayerPosX - PlayerWidth / 2, PlayerPosY - PlayerHeight / 2, PlayerPosX + PlayerWidth / 2, PlayerPosY + PlayerHeight / 2, GetColor(255, 255, 0), false);*/
 }
@@ -110,7 +110,7 @@ int Player::GetHeight()
 }
 void Player::PlayerHitMapColision()
 {
-	// マップチップ表示処理
+
 	for (int y = 0; y < MAP_CHIP_Y_NUM; y++)
 	{
 		for (int x = 0; x < MAP_CHIP_X_NUM; x++)
@@ -135,8 +135,9 @@ void Player::PlayerHitMapColision()
 			int By = y * 32;
 			int Bw = MAPCHIP_SIZW;
 			int Bh = MAPCHIP_SIZH;
+			if (MapChipData1[y][x] == 11 || MapChipData1[y][x] == 3)
+				continue;
 
-			if (MapChipData1[y][x] == 0 /*|| MapChipData1[y][x] == 1 || MapChipData1[y][x] == 2 || MapChipData1[y][x] == 3 || MapChipData1[y][x] == 4*/)
 			{
 				DrawBox(Bx, By, Bx + Bw, By + Bh, GetColor(255, 255, 255), false);
 				DrawBox(Ax, Ay, Ax + Aw, Ay + Ah, GetColor(255, 255, 255), false);
@@ -160,13 +161,24 @@ void Player::PlayerHitMapColision()
 						// ★ここを考える
 						// めり込み量を計算する
 						PlayerJumpFlg = true;
+						if (MapChipData1[y][x] == 1)
+						{
+							toumei[y][x] = true;
+						}
 						int overlap = Ay + Ah - By;
 						PlayerNextPosY = (Ay - overlap);
-					}
-					
+					}	
 				}
 			}
-			
+			if (toumei[y][x] == true)
+			{
+				mapFramecount[y][x]++;
+				if (mapFramecount[y][x] == 50)
+				{
+					MapChipData1[y][x] = 11;
+					mapFramecount[y][x] = 0;
+				}
+			}
 		}
 	}
 	for (int y = 0; y < MAP_CHIP_Y_NUM; y++)
@@ -194,7 +206,9 @@ void Player::PlayerHitMapColision()
 			int Bw = MAPCHIP_SIZW;
 			int Bh = MAPCHIP_SIZH;
 
-			if (MapChipData1[y][x] == 0 /*|| MapChipData1[y][x] == 1 || MapChipData1[y][x] == 2 || MapChipData1[y][x] == 3 || MapChipData1[y][x] == 4*/)
+			if (MapChipData1[y][x] == 11|| MapChipData1[y][x] == 3)		//0番目だけ当たり判定を取る
+				continue;
+
 			{
 				Ay = PlayerPosY;
 				Ax = PlayerNextPosX;
@@ -268,6 +282,7 @@ void Player::UpdatePos()
 {
 	DrawFormatString(100, 30, GetColor(255, 0, 0), "kuribo.m_x = %d", PlayerPosX);
 	DrawFormatString(100, 50, GetColor(255, 0, 0), "kuribo.m_x = %d", PlayerPosY);
+	DrawFormatString(100, 70, GetColor(255, 0, 0), "kuribo.m_x = %d", PlayerJumpFlg);
 
 	PlayerPosX = PlayerNextPosX;
 	PlayerPosY = PlayerNextPosY;

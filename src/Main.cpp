@@ -136,8 +136,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 			case SCENE_INIT_PLAY:
 			{
-				map.InitMap();
+				
 				map.ReadFilemap();
+				map.InitMap();
 				player.InitPlayer();
 				sceneID = SCENE_LOOP_PLAY;
 			}
