@@ -27,6 +27,10 @@ Player::~Player()
 void Player::InitPlayer()
 {
 	PlayerImgHndl = LoadGraph("");
+	PlayerPosX = 0;
+	PlayerPosY = 0;
+	PlayerNextPosX = 400;
+	PlayerNextPosY = 0;
 }
 void Player::MovePlayer()
 {
