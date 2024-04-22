@@ -5,6 +5,8 @@
 #include "Input/Input.h"
 #include "scene/scene.h"
 #include "scene/Play/Player/Player.h"
+#include "scene/Title/Title.h"
+#include "scene/Result/Result.h"
 #include"Map/Map.h"
 
 
@@ -113,19 +115,22 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			//-----------------------------------------
 			case SCENE_INIT_TITLE:
 			{
-
+				title.InitTitle();
+				sceneID = SCENE_LOOP_TITLE;
 			}
 				break;
 
 			case SCENE_LOOP_TITLE:
 			{
-				
+				title.StepTitle();
+				title.DrawTitle();
 			}
 				break;
 
 			case SCENE_FIN_TITLE:
 			{
-				
+				title.FinTitle();
+				sceneID = SCENE_INIT_PLAY;
 			}
 				break;
 
@@ -152,24 +157,27 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			case SCENE_FIN_PLAY:
 			{
 				player.FinPlayer();
+				sceneID = SCENE_INIT_RESULT;
 			}
 				break;
 
 			case SCENE_INIT_RESULT:
 			{
-				
+				result.InitResult();
+				sceneID = SCENE_LOOP_RESULT;
 			}
 				break;
 
 			case SCENE_LOOP_RESULT:
 			{
-				
+				result.StepResult();
+				result.DrawResult();
 			}
 				break;
 
 			case SCENE_FIN_RESULT:
 			{
-				
+				result.FinResult();
 			}
 				break;
 

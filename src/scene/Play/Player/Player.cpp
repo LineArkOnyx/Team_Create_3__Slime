@@ -1,6 +1,7 @@
 #include "Player.h"
 #include"../../../Collision/Collision.h"
 #include"../../../Map/Map.h"
+#include "../../scene.h"
 #define PLAYER_SPEED  (5);
 #define PLAYER_GRAVITY_LIMIT	(10)
 #define PLAYER_GRAVITY  (1);
@@ -233,7 +234,7 @@ void Player::PlayerHitMapColision()
 				if (Collision::IsHitRect(Ax, Ay, Aw, Ah, Bx, By, Bw, Bh))
 				{
 					DrawFormatString(100, 70, GetColor(255, 0, 0), "ÉSÅ[ÉãÉqÉbÉg");
-
+					sceneID = SCENE_FIN_PLAY;
 				}
 			}
 		}

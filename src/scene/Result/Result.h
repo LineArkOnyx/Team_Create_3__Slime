@@ -17,6 +17,7 @@ public:
 private:
 	
 	int ResultHndl;
+	bool ResultDrawFlg;	//trueでタイトルへ移動,falseでゲームへ移動
 	
 };
-
+extern Result result;

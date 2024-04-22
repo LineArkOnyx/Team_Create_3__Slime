@@ -26,7 +26,7 @@ void Title::StepTitle()
 	} 
 	else {
 		if (IsKeyPush(KEY_INPUT_RETURN)) {
-			sceneID = SCENE_INIT_PLAY;
+			sceneID = SCENE_FIN_TITLE;
 		}
 		if (IsKeyPush(KEY_INPUT_A) || IsKeyPush(KEY_INPUT_LEFT)) {
 			if (StageIndex <= 1) {
@@ -50,6 +50,7 @@ void Title::DrawTitle()
 {
 	if (TitleDrawFlg) {
 		DrawGraph(0, 0, TitleImgaeHndl, true);
+		DrawFormatString(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2, GetColor(127, 127, 255), "title");
 	}
 	else {
 		DrawGraph(0, 0, SelectImageHndl, true);
@@ -61,3 +62,4 @@ void Title::FinTitle()
 	DeleteGraph(TitleImgaeHndl);
 	DeleteGraph(SelectImageHndl);
 }
+Title title;

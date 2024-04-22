@@ -20,3 +20,4 @@ private:
 	int SelectImageHndl;
 	bool TitleDrawFlg;	//trueでタイトルを表示,falseでセレクト画面表示
 };
+extern Title title;
