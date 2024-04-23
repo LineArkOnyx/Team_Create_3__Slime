@@ -151,6 +151,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				player.MovePlayer();
 				player.GravityPlayer();
 				player.PlayerHitMapColision();
+				player.dethline();
 				player.UpdatePos();
 				map.DrawMap();	
 				player.DrawPlayer();

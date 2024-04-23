@@ -24,6 +24,7 @@ public:
 	void DrawPlayer();
 	void FinPlayer();
 	void PlayerHitMapColision();
+	void dethline();
 	void GetMoveDirection(bool* _dirArray);
 	void UpdatePos();
 	void SetJumpFlg(bool JumpFlg);	//主にマップチップとの当たり判定で接地したときに使う

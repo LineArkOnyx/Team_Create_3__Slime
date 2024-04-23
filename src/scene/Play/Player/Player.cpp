@@ -11,7 +11,7 @@ Player::Player()
 {
 	PlayerPosX = 0;
 	PlayerPosY = 0;
-	PlayerNextPosX = 400;
+	PlayerNextPosX = 50;
 	PlayerNextPosY = 300;
 	PlayerWidth = 32;
 	PlayerHeight = 32;
@@ -30,21 +30,20 @@ void Player::InitPlayer()
 	PlayerImgHndl = LoadGraph("Data/スライム.png");
 	PlayerPosX = 0;
 	PlayerPosY = 0;
-	PlayerNextPosX = 400;
+	PlayerNextPosX = 100;
 	PlayerNextPosY = 300;
-	if (map.GetMaplevel()==3)
-	{
-		PlayerNextPosX = 10;
-		PlayerNextPosY = 10;
-	}
 }
 void Player::MovePlayer()
 {
 	//ジャンプ
-  	if (IsKeyPush(KEY_INPUT_W) || IsKeyPush(KEY_INPUT_SPACE)&& PlayerJumpFlg == true )
+	if (PlayerJumpFlg == true)
 	{
-		Player_Gravity_Speed -= PLAYER_JUNP;
+		if (IsKeyPush(KEY_INPUT_W) || IsKeyPush(KEY_INPUT_SPACE))
+		{
+			Player_Gravity_Speed -= PLAYER_JUNP;
+		}
 	}
+  	
 	if (IsKeyRelease(KEY_INPUT_W) || IsKeyRelease(KEY_INPUT_SPACE))
 	{
 		PlayerJumpFlg = false;
@@ -288,10 +287,19 @@ void Player::GetMoveDirection(bool* _dirArray)
 }
 void Player::UpdatePos()
 {
-	DrawFormatString(100, 30, GetColor(255, 0, 0), "kuribo.m_x = %d", PlayerPosX);
-	DrawFormatString(100, 50, GetColor(255, 0, 0), "kuribo.m_x = %d", PlayerPosY);
-	DrawFormatString(100, 70, GetColor(255, 0, 0), "kuribo.m_x = %d", PlayerJumpFlg);
+	/*DrawFormatString(100, 30, GetColor(255, 0, 0), "kuribo.m_x = %d", PlayerPosX);
+	
+	DrawFormatString(100, 70, GetColor(255, 0, 0), "kuribo.m_x = %d", PlayerJumpFlg);*/
 
 	PlayerPosX = PlayerNextPosX;
 	PlayerPosY = PlayerNextPosY;
+}
+void Player::dethline()
+{
+	if (PlayerNextPosY > SCREEN_SIZE_Y)
+	{
+		PlayerNextPosX = 100;
+		PlayerNextPosY = 300;
+		/*DrawFormatString(100, 150, GetColor(255, 0, 0), "死んだ" );*/
+	}
 }
