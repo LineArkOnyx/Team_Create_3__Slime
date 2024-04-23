@@ -59,6 +59,7 @@ void Title::DrawTitle()
 }
 void Title::FinTitle()
 {
+	StageIndex--;
 	DeleteGraph(TitleImgaeHndl);
 	DeleteGraph(SelectImageHndl);
 }

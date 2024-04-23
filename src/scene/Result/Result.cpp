@@ -45,9 +45,14 @@ void Result::FinResult()
 {
 	DeleteGraph(ResultHndl);
 	if (ResultDrawFlg) {
+		StageIndex = 1;
 		sceneID = SCENE_INIT_TITLE;
 	}
 	else {
+		StageIndex++;
+		if (StageIndex >= 3) {
+			StageIndex = 0;
+		}
 		sceneID = SCENE_INIT_PLAY;
 	}
 }

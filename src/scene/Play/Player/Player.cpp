@@ -19,6 +19,7 @@ Player::Player()
 	PlayerJumpPower = 0;
 	Player_Gravity_Speed = 0;
 	PlayerJumpFlg = false;
+	PlayerMoveVeFlg = false;
 }
 Player::~Player()
 {
@@ -45,10 +46,12 @@ void Player::MovePlayer()
 	}
 	if (IsKeyKeep(KEY_INPUT_A))
 	{
+		PlayerMoveVeFlg = true;
 		PlayerNextPosX -= PLAYER_SPEED;
 	}
 	if (IsKeyKeep(KEY_INPUT_D))
 	{
+		PlayerMoveVeFlg = false;
 		PlayerNextPosX += PLAYER_SPEED;
 	}
 }
@@ -68,7 +71,7 @@ void Player::GravityPlayer()
 }
 void Player::DrawPlayer()
 {
-	DrawRotaGraph(PlayerPosX+18, PlayerPosY+ 14, 1.0, 0.0, PlayerImgHndl, true);
+	DrawRotaGraph(PlayerPosX + 18, PlayerPosY + 14, 1.0, 0.0, PlayerImgHndl, true, PlayerMoveVeFlg);
 	// デバッグ用のボックス
 	/*DrawBox(PlayerPosX - PlayerWidth / 2, PlayerPosY - PlayerHeight / 2, PlayerPosX + PlayerWidth / 2, PlayerPosY + PlayerHeight / 2, GetColor(255, 255, 0), false);*/
 }

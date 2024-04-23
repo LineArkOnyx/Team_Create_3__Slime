@@ -1,4 +1,5 @@
 #include"Map.h"
+#include"../Common.h"
 #include"DxLib.h"
 int MapHandle[16] = { 0 };									//マップチップデータを入れる配列
 int MapChipData1[MAP_CHIP_Y_NUM][MAP_CHIP_X_NUM];		//一つ目のマップ
@@ -12,6 +13,7 @@ void Map::InitMap()
 }
 void Map::ReadFilemap()
 {
+	Maplevel = StageIndex;
 	int mapIndexX = 0;
 	int mapIndexY = 0;
 	Maplevel++;

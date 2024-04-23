@@ -10,6 +10,7 @@ private:
 	int PlayerNextPosX, PlayerNextPosY;//次の座標
 	int PlayerWidth, PlayerHeight;	//プレイヤーのサイズ
 	int PlayerImgHndl;				// 画像ハンドル
+	bool PlayerMoveVeFlg;			//プレイヤーが左右どちらを向いているかを設定
 	int PlayerJumpPower;			// ジャンプ力
 	int Player_Gravity_Speed;
 	bool PlayerJumpFlg;				// ジャンプの可否(接地フラグ)
