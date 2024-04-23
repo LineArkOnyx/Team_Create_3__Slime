@@ -74,6 +74,35 @@ void Map::ReadFilemap()
 		}
 		fclose(fp);
 	}
+	if (Maplevel == 3)
+	{
+		FILE* fp;
+		fopen_s(&fp, "Data/MapDeta3.csv", "r");
+		while (true) {
+			// 数値部分を読み込む
+			fscanf_s(fp, "%d", &MapChipData1[mapIndexY][mapIndexX]);
+			mapIndexX++;
+
+			// 「,」を飛ばすために読み込みを実行
+			char c = fgetc(fp);
+
+
+
+			// EOFの場合は読み込み終了
+			if (c == EOF)
+			{
+				break;
+			}
+
+			// 改行コードの場合は保存先を変更する
+			if (c == '\n')
+			{
+				mapIndexY++;
+				mapIndexX = 0;
+			}
+		}
+		fclose(fp);
+	}
 }
 void Map::DrawMap()
 {
