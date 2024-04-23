@@ -32,6 +32,11 @@ void Player::InitPlayer()
 	PlayerPosY = 0;
 	PlayerNextPosX = 400;
 	PlayerNextPosY = 300;
+	if (map.GetMaplevel()==3)
+	{
+		PlayerNextPosX = 10;
+		PlayerNextPosY = 10;
+	}
 }
 void Player::MovePlayer()
 {

@@ -9,9 +9,11 @@ class Map
 private:
 	int Maplevel = 0;
 public:
+	
 	void InitMap();			
 	void ReadFilemap();
 	void DrawMap();
+	int GetMaplevel() { return Maplevel; }
 };
 extern Map map;
 extern int MapChipData1[MAP_CHIP_Y_NUM][MAP_CHIP_X_NUM];		//ˆê‚Â–Ú‚Ìƒ}ƒbƒv

@@ -10,6 +10,10 @@ void Map::InitMap()
 {
 	//0にメインブロック
 	LoadDivGraph("Data/氷マップチップ.png", 16, 4, 4, 32, 32, MapHandle);
+	if (Maplevel == 3)
+	{
+		Maplevel = 0;
+	}
 }
 void Map::ReadFilemap()
 {
