@@ -13,7 +13,7 @@ Result::~Result()
 }
 void Result::InitResult()
 {
-	ResultHndl = LoadGraph("");
+	ResultHndl = LoadGraph("Data/GoalFlag.png");
 }
 void Result::StepResult()
 {
@@ -31,12 +31,14 @@ void Result::StepResult()
 }
 void Result::DrawResult()
 {
-	DrawGraph(0, 0, ResultHndl, true);
+	DrawBox(0, 0, SCREEN_SIZE_X, SCREEN_SIZE_Y, GetColor(223, 191, 127), true);
+	DrawRotaGraph(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2, 2.0, 0.0, ResultHndl, true);
+	
 	if (ResultDrawFlg) {
-		DrawFormatString(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2, GetColor(255, 128, 0), "タイトルへ戻る");
+		DrawFormatString(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2, GetColor(255, 128, 0), "   タイトルへ戻る >>");
 	}
 	else {
-		DrawFormatString(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2, GetColor(255, 128, 0), " リトライする ");
+		DrawFormatString(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2, GetColor(255, 128, 0), "<<   次へすすむ     ");
 	}
 }
 void Result::FinResult() 

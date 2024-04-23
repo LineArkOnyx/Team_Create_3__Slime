@@ -2,7 +2,7 @@
 
 Play::Play()
 {
-	
+	BackGroundHndl = -1;
 }
 Play::~Play()
 {
@@ -10,18 +10,19 @@ Play::~Play()
 }
 void Play::InitPlay()
 {
-	player.InitPlayer();
+	BackGroundHndl = LoadGraph("Data/OIP.png");
 }
 void Play::StepPlay()
 {
-	player.MovePlayer();
 	
 }
 void Play::DrawPlay()
 {
-	player.DrawPlayer();
+	DrawRotaGraph(SCREEN_SIZE_X/2, DEFAULT_SCREEN_SIZE_Y/2, 3.0, 0.0, BackGroundHndl, true);
 }
 void Play::FinPlay()
 {
-	player.FinPlayer();
+	DeleteGraph(BackGroundHndl);
+	BackGroundHndl = -1;
 }
+Play play;

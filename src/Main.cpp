@@ -4,6 +4,7 @@
 #include "Common.h"
 #include "Input/Input.h"
 #include "scene/scene.h"
+#include "scene/Play/Play.h"
 #include "scene/Play/Player/Player.h"
 #include "scene/Title/Title.h"
 #include "scene/Result/Result.h"
@@ -136,7 +137,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 			case SCENE_INIT_PLAY:
 			{
-				
+				play.InitPlay();
 				map.ReadFilemap();
 				map.InitMap();
 				player.InitPlayer();
@@ -146,6 +147,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 			case SCENE_LOOP_PLAY:
 			{
+				play.DrawPlay();
 				player.MovePlayer();
 				player.GravityPlayer();
 				player.PlayerHitMapColision();
@@ -157,6 +159,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 			case SCENE_FIN_PLAY:
 			{
+				play.FinPlay();
 				player.FinPlayer();
 				sceneID = SCENE_INIT_RESULT;
 			}

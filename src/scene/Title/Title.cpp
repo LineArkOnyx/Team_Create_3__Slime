@@ -13,8 +13,8 @@ Title::~Title()
 void Title::InitTitle()
 {
 	TitleDrawFlg = true;
-	TitleImgaeHndl = LoadGraph("");
-	SelectImageHndl = LoadGraph("");
+	TitleImgaeHndl = LoadGraph("Data/OIP.png");
+	SelectImageHndl = LoadGraph("Data/SNOW.png");
 	StageIndex = 1;
 }
 void Title::StepTitle()
@@ -49,11 +49,11 @@ void Title::StepTitle()
 void Title::DrawTitle()
 {
 	if (TitleDrawFlg) {
-		DrawGraph(0, 0, TitleImgaeHndl, true);
+		DrawRotaGraph(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2, 2.5,0.0,TitleImgaeHndl, true);
 		DrawFormatString(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2, GetColor(127, 127, 255), "title");
 	}
 	else {
-		DrawGraph(0, 0, SelectImageHndl, true);
+		DrawRotaGraph(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2, 0.7, 0.0, SelectImageHndl, true);
 		DrawFormatString(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2, GetColor(127, 127, 255), "STAGE : %d", StageIndex);
 	}
 }

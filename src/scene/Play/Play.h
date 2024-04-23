@@ -18,5 +18,6 @@ public:
 	void FinPlay();
 
 private:
-	
+	int BackGroundHndl;//”wŒi‰æ‘œƒnƒ“ƒhƒ‹
 };
+extern Play play;
