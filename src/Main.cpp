@@ -61,7 +61,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//ˆê”ÔÅ‰‚É‚P‰ñ‚¾‚¯‚â‚éˆ—‚ð‚±‚±‚É‘‚­
 
 
-	sceneID = SCENE_INIT_PLAY;
+	sceneID = SCENE_INIT_TITLE;
 
 
 	//“ü—Í§Œä‰Šú‰»
